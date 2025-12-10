@@ -16,6 +16,7 @@
         "homebridge": ">=1.3.0"
     },
     "scripts": {
+        "scan": "node scan.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

@@ -5,9 +5,21 @@ This plugin let you control RGB Bluetooth-enabled "ELK-BLEDOM" LED light strips,
 Control On/Off, Hue, Saturation and Brightness.
 
 ## Prerequisite
-You need to have a bluetooth device. Check using `hcitool dev` command. You may also need root access with Homebridge
+You need to have a bluetooth device. On Linux you can check using `hcitool dev` command. You may also need root access with Homebridge.
 
-To run without root access, go to homebridge terminal and type ```sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)```
+On macOS you do **not** need `setcap`, but you must allow your Homebridge/Terminal process to use Bluetooth:
+
+1. Open **System Settings → Privacy & Security → Bluetooth**.
+2. Make sure the Terminal app (or the Homebridge UI service, if it prompts) is allowed to use Bluetooth.
+3. You may need to restart Homebridge after granting permission.
+
+To find nearby ELK-BLEDOM devices on either Linux or macOS, run:
+
+```
+npm run scan
+```
+
+The script will print the discovered device names and UUIDs you can copy into the configuration.
 
 ## Installation
 
