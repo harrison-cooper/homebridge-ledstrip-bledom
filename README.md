@@ -5,13 +5,34 @@ This plugin let you control RGB Bluetooth-enabled "ELK-BLEDOM" LED light strips,
 Control On/Off, Hue, Saturation and Brightness.
 
 ## Prerequisite
-You need to have a bluetooth device. Check using `hcitool dev` command. You may also need root access with Homebridge
+You need to have a bluetooth device. On Linux you can check using `hcitool dev` command. You may also need root access with Homebridge.
 
-To run without root access, go to homebridge terminal and type ```sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)```
+On macOS you do **not** need `setcap`, but you must allow your Homebridge/Terminal process to use Bluetooth:
+
+1. Open **System Settings → Privacy & Security → Bluetooth**.
+2. Make sure the Terminal app (or the Homebridge UI service, if it prompts) is allowed to use Bluetooth.
+3. You may need to restart Homebridge after granting permission.
+
+To find nearby ELK-BLEDOM devices on either Linux or macOS, run:
+
+```
+npm run scan
+```
+
+The script will print the discovered device names and UUIDs you can copy into the configuration.
 
 ## Installation
 
-`npm i @bjclopes/homebridge-ledstrip-bledom`
+### Homebridge UI (recommended)
+1. Open the Homebridge web UI and go to **Plugins → Search**.
+2. Search for **Homebridge Ledstrip BLEDOM**.
+3. Click **Install** and wait for Homebridge to restart the child bridge for the accessory.
+4. Add the accessory configuration shown below to your Homebridge config and restart if prompted.
+
+### Command line
+```bash
+sudo npm install -g @bjclopes/homebridge-ledstrip-bledom
+```
 
 From version 2.0.11, the plugin is being run in a child bridge and, as a fail-safe, the child bridge restarts if the peripheral becomes unreacheable.
 
@@ -25,6 +46,20 @@ From version 2.0.11, the plugin is being run in a child bridge and, as a fail-sa
 ```
 
 To find your device uuid, use `hcitool lescan`, grab the device uuid, remove all ':' and use lowercase alpha characters
+
+## Local testing and diagnostics
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Run the automated tests:
+   ```bash
+   npm test
+   ```
+3. Scan for nearby ELK-BLEDOM devices and confirm their UUIDs (macOS or Linux):
+   ```bash
+   npm run scan
+   ```
 
 ## Contribution
 This package is based on the work of [Lylya](https://github.com/Lyliya) on the project [homebridge-ledstrip-ble](https://github.com/Lyliya/homebridge-ledstrip-ble/).
