@@ -17,7 +17,7 @@
     },
     "scripts": {
         "scan": "node scan.js",
-        "test": "node --test"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
